@@ -1,0 +1,230 @@
+:root {
+  color-scheme: dark;
+  font-family: "IBM Plex Sans", "Avenir Next", sans-serif;
+  background: radial-gradient(circle at 12% 8%, #24324a, #0a0f15 56%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  color: #f2f6ff;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 12px;
+  min-height: 100vh;
+  padding: 12px;
+}
+
+.scene-panel,
+.chat-panel {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #2c384a;
+  background: rgba(11, 17, 26, 0.84);
+  backdrop-filter: blur(4px);
+}
+
+.scene-panel {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 0;
+}
+
+.scene-canvas {
+  min-height: 0;
+}
+
+.scene-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 54px;
+  padding: 0 14px;
+  border-bottom: 1px solid #2b394f;
+  background: linear-gradient(180deg, rgba(30, 45, 66, 0.6), rgba(14, 24, 38, 0.4));
+}
+
+.titlebar h1 {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.badge.connected {
+  background: #1f6e45;
+}
+
+.badge.disconnected {
+  background: #8d3134;
+}
+
+.chat-panel {
+  display: grid;
+  grid-template-rows: auto auto auto auto 1fr auto;
+  min-height: 0;
+}
+
+.agent-manager {
+  display: grid;
+  grid-template-columns: 1.1fr 0.7fr 1.3fr 1fr auto;
+  gap: 6px;
+  padding: 10px;
+  border-bottom: 1px solid #2b394f;
+}
+
+.agent-manager input,
+.agent-manager select,
+.agent-manager button {
+  border: 1px solid #42577a;
+  border-radius: 8px;
+  background: #111b2a;
+  color: #d8e4ff;
+  padding: 8px;
+}
+
+.agent-manager button {
+  background: #2e4f82;
+  cursor: pointer;
+}
+
+.agent-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  padding: 10px;
+  border-bottom: 1px solid #2b394f;
+}
+
+.tab {
+  border: 1px solid #405271;
+  border-radius: 8px;
+  padding: 8px;
+  background: #101a29;
+  color: #d7e4ff;
+  text-align: left;
+}
+
+.tab.active {
+  background: #1d3558;
+  border-color: #5d83ba;
+}
+
+.agent-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #2b394f;
+}
+
+.agent-actions button {
+  border: 1px solid #405271;
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: #101a29;
+  color: #d7e4ff;
+}
+
+.agent-actions small {
+  margin-left: auto;
+  color: #9ab2d7;
+}
+
+.chat-log {
+  padding: 12px;
+  overflow: auto;
+}
+
+.msg {
+  margin: 0 0 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #101928;
+  border: 1px solid rgba(112, 132, 167, 0.2);
+}
+
+.msg header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.msg p {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid #2b394f;
+}
+
+.composer input,
+.composer button {
+  border: 1px solid #42577a;
+  border-radius: 8px;
+  background: #0f1827;
+  color: #f4f8ff;
+  padding: 10px;
+}
+
+.composer button {
+  cursor: pointer;
+  background: #2d4f82;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 980px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .scene-panel {
+    min-height: 52vh;
+  }
+
+  .agent-manager {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-tabs {
+    grid-template-columns: 1fr;
+  }
+}
+

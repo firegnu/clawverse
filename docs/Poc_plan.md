@@ -41,6 +41,57 @@
 - `running`：动作速度提升 + 脚下环。
 - `error`：红闪 + 错误提示气泡。
 
+### 3.4 PoC 组件架构图
+```mermaid
+graph TD
+  subgraph U["User Side"]
+    TG["Telegram"]
+    BR["Browser: Three.js Scene (React + Vite)"]
+  end
+
+  subgraph S["Your Service"]
+    BFF["BFF Service (Node.js)"]
+    HUB["Realtime Hub (WebSocket)"]
+    MAP["Protocol Mapper + State Machine"]
+    ROUTER["Session Router (local/vps)"]
+  end
+
+  subgraph A["OpenClaw Runtime"]
+    LOCAL["OpenClaw Gateway (Local macOS)"]
+    VPS["OpenClaw Gateway (VPS)"]
+  end
+
+  BR -->|"client.chat.send"| BFF
+  BFF --> HUB
+  HUB --> MAP
+  MAP --> ROUTER
+  ROUTER --> LOCAL
+  ROUTER --> VPS
+
+  LOCAL -->|"state/message/delta/error"| BFF
+  VPS -->|"state/message/delta/error"| BFF
+  BFF -->|"server.* unified events"| BR
+
+  TG -->|"incoming message"| BFF
+  BFF -->|"mirror message"| TG
+```
+
+### 3.5 关键交互时序图
+```mermaid
+sequenceDiagram
+  participant U as "User"
+  participant W as "Web Scene"
+  participant B as "BFF"
+  participant G as "OpenClaw Gateway"
+
+  U->>W: "send message to local/vps"
+  W->>B: "client.chat.send"
+  B->>G: "forward to target agent"
+  G-->>B: "stream delta + state ticks"
+  B-->>W: "server.stream.delta / server.agent.state"
+  W-->>U: "avatar animation + chat bubble"
+```
+
 ## 4. 要完成的东西（按优先级）
 ### P0（先做，框架闭环）
 - [ ] 初始化 monorepo 基础结构：`apps/web`、`apps/bff`、`packages/protocol`。

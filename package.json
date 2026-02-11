@@ -1,0 +1,16 @@
+{
+  "name": "clawverse",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.14.0",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @clawverse/bff --filter @clawverse/web run dev",
+    "dev:bff": "pnpm --filter @clawverse/bff run dev",
+    "dev:web": "pnpm --filter @clawverse/web run dev",
+    "typecheck": "pnpm -r run typecheck"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
+
