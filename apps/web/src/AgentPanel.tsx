@@ -46,7 +46,7 @@ export const AgentPanel = ({
         <option value="mock">mock</option>
         <option value="openclaw">openclaw</option>
       </select>
-      <input value={wsAgentUrl} placeholder="ws://127.0.0.1:8787/ws" onChange={(event) => onWsUrl(event.target.value)} />
+      <input value={wsAgentUrl} placeholder="ws://127.0.0.1:18789" onChange={(event) => onWsUrl(event.target.value)} />
       <input value={token} placeholder="token (optional)" onChange={(event) => onToken(event.target.value)} />
       <button onClick={onAddAgent}>Add Agent</button>
     </div>

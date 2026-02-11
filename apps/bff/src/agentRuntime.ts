@@ -33,8 +33,9 @@ export const connectRecord = (record: AgentRecord, hooks: RuntimeHooks): void =>
       record.lastError = null;
       hooks.emitCatalog();
     },
-    onDisconnected: () => {
+    onDisconnected: (message) => {
       record.connection = "disconnected";
+      record.lastError = message;
       hooks.emitCatalog();
     },
     onState: (state) => hooks.emitState(record, state),
@@ -84,4 +85,3 @@ export const sendPrompt = (record: AgentRecord, text: string, hooks: RuntimeHook
   }
   record.openclaw?.send(text);
 };
-

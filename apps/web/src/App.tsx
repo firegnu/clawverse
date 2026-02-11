@@ -78,6 +78,13 @@ export default function App() {
     return () => ws.close();
   }, [appendDelta, pushMessage, pushSystemError, setAgentState, setConnection, setAgents]);
 
+  useEffect(() => {
+    if (kind === "openclaw" && wsAgentUrl.trim().length === 0) {
+      setWsAgentUrl("ws://127.0.0.1:18789");
+      setStatusMessage("Tip: OpenClaw default is ws://127.0.0.1:18789 (no /ws).");
+    }
+  }, [kind, wsAgentUrl]);
+
   const selectedMessages = useMemo(() => {
     if (!selectedAgent) return [];
     return messages[selectedAgent] ?? [];
